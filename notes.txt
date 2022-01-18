@@ -1,0 +1,122 @@
+
+Language: SeQuentiaL
+Files: filename.seq
+
+
+Build Plan -----------------------------------------------------------------------------------------
+
+COMPLETE
+	MS01: Initial Lexer Structure, Simple Token Use Case
+
+
+ACTIVE
+
+
+TODO
+	MS02: Break Out Clauses, Initial Clause Bag Classes
+	MS03: Reassemble Simple SELECT-FROM-WHERE Query
+	MS04: Incorporate SQL Validator & Validation Method
+	MS05: Setup SQL Validated Unit Test Coverage
+
+
+
+Clause Designators ---------------------------------------------------------------------------------
+
+Same
+	SELECT
+	FROM
+	WHERE
+	HAVING
+	LIMIT
+	WITH
+	UNION
+
+
+Modified
+	GROUP
+	ORDER
+	DISTINCT : used as a sole designator after the select definition
+
+
+Created
+	CALC : makes some type of aliasable calculation, whether it is in the projection or not
+	QUERY : Counterpart to the nested CTE syntax to switch to the final query
+	INSPECT : special mode where all possible values in output projection are included
+		+ Useful as a type of debug mode
+		+ hidden columns would have a special designator on the output names, TBD
+
+
+----- Operators -----
+
+-> | alias bid
+=> | yields
+
+
+
+----- Functionality Additions -----
+
+Ternary Operator
+
+	(test) ? (true value) : (false value)
+
+
+CASE Statement
+
+	CASE -> alias_name:
+		(test) => (value)
+		(test) => (value)
+		(else-value)
+
+
+
+Example Scratchpad ---------------------------------------------------------------------------------
+
+
+FROM:
+	database.table_alpha -> ta
+	JOIN INNER database.table_beta -> tb ON common_field
+	JOIN LEFT database.table_delta -> td
+		ON ta.field == td.other_field
+		AND ta.timestamp > td.created_date
+
+WHERE:
+	td.name == 'Benny'
+
+CALC:
+	(year(td.date_field) + month(td.date_field)) -> year_month
+
+GROUP:
+	tb.id
+	year_month
+
+CALC:
+	(calculation) -> alias_name
+	front_alias <- (calculation)
+	(boolean_test) ? (true_value) : (false_value) -> alias_ternary
+
+SELECT:
+	year_month, tb.id, front_alias, alias_ternary, alias_name
+
+ORDER:
+	year_month ASC
+	front_alias DESC
+
+DISTINCT
+
+LIMIT: 25
+
+
+--
+
+WITH:
+	cte_alias:
+		FROM:
+		WHERE:
+		SELECT:
+	
+	cte_other:
+		<FROM/SELECT>
+
+QUERY:
+	FROM:
+	SELECT:
