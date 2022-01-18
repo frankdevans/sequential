@@ -57,6 +57,6 @@ class RouterBag():
 	@property
 	def clause_bags(self) -> List[ClausBag]:
 		return [
-			generate_clause_bag(clause = span.clause)
+			generate_clause_bag(clause = span.clause, tokens = span.tokens)
 			for span in self.clause_spans
 		]
