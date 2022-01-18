@@ -40,3 +40,5 @@ class SequentialLexer(Lexer):
 	COMMA = r','
 	LINE_BREAK = r'\n'
 	PASSTHROUGH = r'[^,\s\n]+'
+
+	# TODO: Handle comments at top-level. Support both SQL kinds

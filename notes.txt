@@ -6,16 +6,17 @@ Files: filename.seq
 Build Plan -----------------------------------------------------------------------------------------
 
 COMPLETE
+	MS01: Initial Lexer Structure, Simple Token Use Case
 
 
 ACTIVE
-	MS01: Initial Lexer Structure, Simple Token Use Case
 
 
 TODO
 	MS02: Break Out Clauses, Initial Clause Bag Classes
 	MS03: Reassemble Simple SELECT-FROM-WHERE Query
 	MS04: Incorporate SQL Validator & Validation Method
+	MS05: Setup SQL Validated Unit Test Coverage
 
 
 
