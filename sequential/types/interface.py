@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class clause(Enum):
+
 	FROM = 'FROM'
 	SELECT = 'SELECT'
 	WHERE = 'WHERE'
