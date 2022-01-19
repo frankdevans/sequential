@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union, List, Tuple
 from dataclasses import dataclass
 from ..bags.clause import (
 	ClauseBag,
@@ -9,6 +9,7 @@ from ..bags.clause import (
 )
 
 from sequential.types import clause
+from .QuarkAssembler import QuarkAssembler
 
 
 FALLBACK = NULLClauseBag(clause = clause.NULL, tokens = tuple())
@@ -28,3 +29,28 @@ class StatementAssembler:
 
 	@property
 	def has_unions(self) -> bool: return (len(self.UNION) > 0)
+
+	@property
+	def break_down_cte(self): pass  # TODO
+
+	@property
+	def has_clause_overlap(self)-> bool:
+		u_clauses = set([cb.clause.value for cb in self.CLAUSES])
+		n_clauses = len(self.CLAUSES)
+		return (n_clauses > len(u_clauses))
+
+	@property
+	def break_into_quarks(self) -> Tuple[QuarkAssembler]:
+		if self.has_clause_overlap:
+			xm = 'Not Implemented Yet, stick with the single cases for now.'
+			raise NotImplementedError(xm)
+		
+		params = {bag.clause.value : bag for bag in self.CLAUSES}
+		assembler = QuarkAssembler(**params)
+		return (assembler,)
+	
+	@property
+	def sql(self) -> str:
+		quarks = self.break_into_quarks
+		assembled = '\n'.join([quark.sql for quark in quarks])
+		return assembled

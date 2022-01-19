@@ -20,7 +20,7 @@ FALLBACK = NULLClauseBag(clause = clause.NULL, tokens = tuple())
 
 
 @dataclass(frozen = True)
-class QueryAssembler:
+class QuarkAssembler:
 
 	SELECT : SELECTClauseBag
 	FROM : FROMClauseBag
