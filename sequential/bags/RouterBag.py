@@ -1,9 +1,9 @@
-from typing import Tuple, List
+from typing import List
 from dataclasses import dataclass
-from sly.lex import Token
+from sequential.types import _TOKENS
 
 from ..types import clause
-from .clause import ClausBag
+from .clause import ClauseBag
 
 from .clause import generate_clause_bag
 
@@ -15,13 +15,13 @@ class _ClauseSpan:
 	clause : clause
 	idx_mark : int
 	idx_end : int
-	tokens : Tuple[Token]
+	tokens : _TOKENS
 
 
 @dataclass(frozen = True)
 class RouterBag():
 
-	tokens : Tuple[Token]
+	tokens : _TOKENS
 
 	_clauses = {f"C_{name}" : member for (name,member) in clause.__members__.items()}
 
@@ -55,7 +55,7 @@ class RouterBag():
 		return [span.clause for span in self.clause_spans]
 
 	@property
-	def clause_bags(self) -> List[ClausBag]:
+	def clause_bags(self) -> List[ClauseBag]:
 		return [
 			generate_clause_bag(clause = span.clause, tokens = span.tokens)
 			for span in self.clause_spans
