@@ -6,6 +6,7 @@ from ..types import clause
 from .clause import ClauseBag
 
 from .clause import generate_clause_bag
+from ..assemblers.QueryAssembler import QueryAssembler
 
 
 
@@ -60,3 +61,16 @@ class RouterBag():
 			generate_clause_bag(clause = span.clause, tokens = span.tokens)
 			for span in self.clause_spans
 		]
+	
+	@property
+	def temp(self):
+		bags = self.clause_bags
+		for bag in bags: print(bag.clause, bag.n_tokens)
+
+		params = {bag.clause.value : bag for bag in self.clause_bags}
+		query = QueryAssembler(**params)
+		print(query.sql)
+
+
+
+		return
