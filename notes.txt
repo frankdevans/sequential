@@ -51,6 +51,10 @@ CASE Statement
 		(else-value)
 
 
+Method Chaining in CALC
+	left(upper(tab.column1), 3) as new_name  |  tab.column1.upper().left(4) -> new_name
+
+
 
 Example Scratchpad ---------------------------------------------------------------------------------
 

@@ -5,4 +5,19 @@ from .BaseClauseBag import BaseClauseBag
 
 class WHEREClauseBag(BaseClauseBag):
 	
-	def sql(self, carryover:dict) -> str: return 'TODO'
+	_ignore = {'LINE_BREAK'}
+	
+	@property
+	def tokens_render(self) -> _TOKENS:
+		return tuple([
+			token for token in self.tokens 
+			if (token.type not in self._ignore)
+		])
+	
+	def sql(self, carryover:dict) -> str:
+		render_tokens = [
+			'WHERE',
+			*[token.value for token in self.tokens_render]
+		]
+		quark = ' '.join(render_tokens)
+		return quark

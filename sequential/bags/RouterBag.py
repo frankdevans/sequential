@@ -6,6 +6,7 @@ from ..types import clause
 from .clause import ClauseBag
 
 from .clause import generate_clause_bag
+from ..assemblers.StatementAssembler import StatementAssembler
 
 
 
@@ -60,3 +61,23 @@ class RouterBag():
 			generate_clause_bag(clause = span.clause, tokens = span.tokens)
 			for span in self.clause_spans
 		]
+	
+	@property
+	def handoff_assembler(self) -> StatementAssembler:
+		field_clauses = {clause.WITH, clause.QUERY, clause.UNION}
+		
+		bags = self.clause_bags
+		bags_with = [bag for bag in bags if (bag.clause is clause.WITH)]
+		bags_query = [bag for bag in bags if (bag.clause is clause.QUERY)]
+		bags_union = [bag for bag in bags if (bag.clause is clause.UNION)]
+		bags_clauses = [bag for bag in bags if not (bag.clause in field_clauses)]
+
+		params = {
+			'CLAUSES' : bags_clauses,
+			'UNION' : bags_union,
+			**({'WITH':bags_with[0]} if (len(bags_with) > 0) else {}),
+			**({'QUERY':bags_query[0]} if (len(bags_query) > 0) else {}),
+		}
+		
+		assembler = StatementAssembler(**params)
+		return assembler

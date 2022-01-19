@@ -5,13 +5,16 @@ class clause(Enum):
 
 	FROM = 'FROM'
 	SELECT = 'SELECT'
+	
 	WHERE = 'WHERE'
-	HAVING = 'HAVING'
 	LIMIT = 'LIMIT'
-	WITH = 'WITH'
-	UNION = 'UNION'
-	GROUP = 'GROUP'
 	ORDER = 'ORDER'
-	QUERY = 'QUERY'
+	GROUP = 'GROUP'
+	HAVING = 'HAVING'
 	CALC = 'CALC'
+	
+	UNION = 'UNION'
+	WITH = 'WITH'
+	QUERY = 'QUERY'
+	
 	NULL = '_'
