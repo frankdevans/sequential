@@ -1,0 +1,6 @@
+FROM:
+	database.table tab
+WHERE:
+	other_column > 25
+SELECT:
+	column_name, other_column

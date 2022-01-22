@@ -7,8 +7,9 @@ with open('./requirements.txt', 'r') as r: DEPENDENCIES = r.readlines()
 setup(
 	name = 'sequential',
 	packages = find_packages(exclude = ['tests', 'tests.*']),
+	include_package_data = True,
 	package_data = {
-		'': ['*.json'],  # If any package contains *.json files, include them
+		'': ['*.seq'],  # If any package contains *.seq files, include them
 	},
 	setup_requires = ['wheel'],
 	install_requires = DEPENDENCIES,

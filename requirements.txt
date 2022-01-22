@@ -6,4 +6,5 @@ py==1.11.0
 pyparsing==3.0.6
 pytest==6.2.5
 sly==0.4
+sqlvalidator==0.0.18
 toml==0.10.2

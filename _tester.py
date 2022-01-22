@@ -33,7 +33,8 @@ router = RouterBag(tokens = tuple(tokens))
 
 assembler = router.handoff_assembler
 # print(assembler.has_cte)
-print(assembler.sql)
+# print(assembler.sql)
+
 
 
 '''

@@ -9,6 +9,19 @@ from .clause import generate_clause_bag
 from ..assemblers.StatementAssembler import StatementAssembler
 
 
+import pkg_resources
+
+loc = 'from_select.seq'
+print(pkg_resources.resource_exists(__name__, loc))
+
+# thingy = pkg_resources.resource_string(__name__, loc)
+# print(thingy.decode('UTF-8'))
+
+downstream = pkg_resources.resource_listdir(__name__, 'clause')
+print(downstream)
+
+
+
 
 @dataclass(frozen = True)
 class _ClauseSpan:
